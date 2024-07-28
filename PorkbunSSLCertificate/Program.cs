@@ -31,16 +31,24 @@ try
     }
     if (pathPublicKey != string.Empty && apiResponse.PublicKey != null && apiResponse.PublicKey.StartsWith("-----BEGIN"))
     {
-        fileEdited = fileEdited || await Methods.SaveFileIfContentIsDifferentAsync(pathIntermediateCertificate, apiResponse.PublicKey);
+        fileEdited = fileEdited || await Methods.SaveFileIfContentIsDifferentAsync(pathPublicKey, apiResponse.PublicKey);
     }
     if (pathPrivateKey != string.Empty && apiResponse.PrivateKey != null && apiResponse.PrivateKey.StartsWith("-----BEGIN"))
     {
-        fileEdited = fileEdited || await Methods.SaveFileIfContentIsDifferentAsync(pathIntermediateCertificate, apiResponse.PrivateKey);
+        fileEdited = fileEdited || await Methods.SaveFileIfContentIsDifferentAsync(pathPrivateKey, apiResponse.PrivateKey);
     }
 
     if (fileEdited)
     {
-        Process.Start(ConfigurationManager.Get("CommandToReloadWebServer"));
+        string processFileName = ConfigurationManager.Get("ProcessToReloadWebServer:FileName");
+        string processArguments = ConfigurationManager.Get("ProcessToReloadWebServer:Arguments");
+
+        if (processFileName != string.Empty)
+        {
+            ProcessStartInfo process = new() { FileName = processFileName, Arguments = processArguments };
+            Process.Start(process);
+            Console.WriteLine("Web server reloaded!");
+        }
     }
 }
 catch (Exception ex)
