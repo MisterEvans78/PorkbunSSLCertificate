@@ -10,13 +10,13 @@
 
                 if (content == fileContent)
                 {
-                    Console.WriteLine("File already exists: " + path);
+                    Console.WriteLine("File already up-to-date: " + path);
                     return false;
                 }
             }
             
             await File.WriteAllTextAsync(path, content);
-            Console.WriteLine("File saved: " + path);
+            Console.WriteLine("File created or updated: " + path);
             return true;
         }
     }
