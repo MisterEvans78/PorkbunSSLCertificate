@@ -23,19 +23,19 @@ try
 
     if (pathCertificateChain != string.Empty && apiResponse.CertificateChain != null && apiResponse.CertificateChain.StartsWith("-----BEGIN"))
     {
-        fileEdited = fileEdited || await Methods.SaveFileIfContentIsDifferentAsync(pathCertificateChain, apiResponse.CertificateChain);
+        fileEdited = fileEdited | await Methods.SaveFileIfContentIsDifferentAsync(pathCertificateChain, apiResponse.CertificateChain);
     }
     if (pathIntermediateCertificate != string.Empty && apiResponse.IntermediateCertificate != null && apiResponse.IntermediateCertificate.StartsWith("-----BEGIN"))
     {
-        fileEdited = fileEdited || await Methods.SaveFileIfContentIsDifferentAsync(pathIntermediateCertificate, apiResponse.IntermediateCertificate);
+        fileEdited = fileEdited | await Methods.SaveFileIfContentIsDifferentAsync(pathIntermediateCertificate, apiResponse.IntermediateCertificate);
     }
     if (pathPublicKey != string.Empty && apiResponse.PublicKey != null && apiResponse.PublicKey.StartsWith("-----BEGIN"))
     {
-        fileEdited = fileEdited || await Methods.SaveFileIfContentIsDifferentAsync(pathPublicKey, apiResponse.PublicKey);
+        fileEdited = fileEdited | await Methods.SaveFileIfContentIsDifferentAsync(pathPublicKey, apiResponse.PublicKey);
     }
     if (pathPrivateKey != string.Empty && apiResponse.PrivateKey != null && apiResponse.PrivateKey.StartsWith("-----BEGIN"))
     {
-        fileEdited = fileEdited || await Methods.SaveFileIfContentIsDifferentAsync(pathPrivateKey, apiResponse.PrivateKey);
+        fileEdited = fileEdited | await Methods.SaveFileIfContentIsDifferentAsync(pathPrivateKey, apiResponse.PrivateKey);
     }
 
     if (fileEdited)
